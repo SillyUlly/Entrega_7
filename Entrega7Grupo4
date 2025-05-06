@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}
+\input{packages/preamble_v1.0.tex}
+\settitle[\Large Subgrupo 4:\\ 
+\Large Juan Manuel Sánchez Arrua,\\ 
+\Large Jaime Sánchez-Carralero Morato,\\
+\Large Óscar Marzal Bardón,\\
+\Large Joan Andrés Mercado Tandazo][ELECTRODINÁMICA CLÁSICA]{Entrega 7}
+\setformat{Electrodinámica Clásica - Unidad 5}
+\newcommand{\Prad}{P_\textrm{rad}}
+\newcommand{\Ekin}{\mathcal{E}_\textrm{kin}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\Erad}{\E_\text{rad}}
+\newcommand{\trel}{\tau_\textrm{rel}}
+\begin{document}
+\brightmode
+\maketitle
+\section*{Ejercicio 3}
+Un electrón entra con velocidad no relativista $\vec{v}$ en una región del espacio donde hay un campo magnético uniforme y constante, $\vec{B}$, perpendicular a dicha velocidad. Al mismo tiempo que rota, la partícula radia y al perder energía sigue una trayectoria espiral. Asumiendo que cada revolución del electrón es esencialmente circular, 
+\begin{enumerate}[label=\roman*)]
+    \item calcular la potencia radiada;
+    \item obtener la variación de la energía cinética de la partícula, expresándola en función del tiempo de relajación $\tau_{\text{rel}}$ (aquel en el que su energía se reduce por un factor $1/e$);
+    \item calcular $\tau_{\text{rel}}$ para dos valores del campo magnético, $1 \, \text{T}$ y $25 \, \mu\text{T}$, y justificar que la asunción de órbitas aproximadamente circulares es adecuada en ambos casos.
+\end{enumerate}
+\Resolucion
+
+\begin{enumerate}[label=\roman*{})]
+    \item Como $v\ll c$ se emplea la expresión de la potencia radiada de Larmor, i.e:
+    \begin{equation}
+        P_\textrm{rad} = \dfrac{q^2 a^2}{6\pi c^3}\label{eq: Larmor}
+    \end{equation}
+    Como se indica que se asuma que la trayectoria es circular durante cada revolución, se tiene: 
+    \begin{equation}
+        F = q\dfrac{v}{c}B \;\Rightarrow\; a_c = \dfrac{qvB}{mc} 
+    \end{equation}
+    Donde $a_c$ es la aceleración centrípeta, $q$ la carga del electrón y $m$ su masa. Por tanto sustitiyendo en \eqref{eq: Larmor} se tiene: 
+    \begin{equation}
+        \Prad = \dfrac{q^4 v^2 B^2}{6\pi c^5m^2}
+    \end{equation}
+    \item Buscamos mediante la potencia radiada, la energía cinética de la partícula. Como: 
+    \begin{equation}
+        \Prad = -\dv{\Ekin}{t} = \dfrac{q^4 B^2}{3\pi c^5 m ^3}\Ekin
+    \end{equation}
+    Donde se ha empleado la expresión de la energía cinética $\Ekin$ para sustituir el módulo de la velocidad $v^2$. Resolvemos la EDO y encontramos el \textit{tiempo de relajación} $\trel$: 
+    \begin{align}   
+        \trel &= \dfrac{3\pi c^5 m^3 }{q^4 B^2}\\ 
+        \int_{\Ekin(0)}^{\Ekin(t)}\dfrac{\dd{\Ekin '}}{\Ekin '} &= \int_{0}^{t}\dfrac{\dd{t'}}{\trel} \;\Rightarrow\; \Ekin(t) = \Ekin(0)e^{-t/\trel}\label{eq: Ekin (t)}
+    \end{align}
+    \item De la última expresión \eqref{eq: Ekin (t)}, recuperamos la expresión para el módulo de la velocidad: 
+    \begin{equation}
+        v^2(t) = v^2(0)e^{-t/\trel} \;\Rightarrow\; v(t) = v(0)e^{-t/(2\trel)}
+    \end{equation}  
+    A continuación, como el movimiento se aproxima como circular, se tiene: 
+    \begin{equation}
+        \dfrac{qvB}{c} = \dfrac{mv^2}{r} \;\Rightarrow\; r = \dfrac{mvc}{qB}
+    \end{equation}
+    Derivando esta expresión, estimamos la velocidad radial de la partícula: 
+    \begin{equation}
+        \dot{r} = -\dfrac{mc}{qB}\dfrac{v(0)}{2\trel}e^{-t/(2\trel)}\label{eq: vel. radial} 
+    \end{equation}
+    Nos interesa también cuanto es el periodo ($T$) del movimiento circular: 
+    \begin{equation}
+        \dfrac{v}{r} = \dfrac{2\pi}{T} \;\Rightarrow\; T = 2\pi r/v = \dfrac{2\pi mc}{qB}
+    \end{equation}
+    De esta forma podemos reescribir el radio de la órbita y la velocidad radial como: 
+    \begin{align}
+        r(t) &= v(0) \dfrac{T}{2\pi}e^{-t/(2\trel)}\\ 
+        \dot{r}(t) &= -\dfrac{v(0)}{4\pi}\dfrac{T}{\trel}e^{-t/(2\trel)} = -\dfrac{T}{4\pi \trel} v(t)\\
+        \dfrac{T}{\trel} &= 2\pi\dfrac{mc}{qb}\dfrac{q^4B^2}{3\pi c^5 m^3} = \dfrac{2}{3} \dfrac{q^3 B}{m^2 c^4}
+    \end{align}
+    De estas expresiones inferimos que si $T/\trel\ll 1$ entonces la aproximación al movimiento circular que se realiza se sostiene, pues la variación en el radio sería despreciable durante un periodo (veáse el argumento de la exponencial) e igualmente lo sería la velocidad radial frente al módulo de la velocidad de la partícula (véase su prefactor), siendo esencialmente entonces la dirección tangencial, lo que se corresponde con un movimiento circular durante un periodo, y en general espiral para un tiempo arbitrario.\par 
+    Entonces veamos cuáles son los tiempos de relajación para los campos magnéticos que se nos plantean y demostramos que la aproximación circular es válida mediante el cociente $T/\trel$. 
+    \begin{enumerate}[label=\alph*)]
+        \item $B = 1$ T. Lo primero que hemos de hacer es realizar un cambio del sistema de Heaviside-Lorentz en el que están escritas nuestras ecuaciones al sistema Internacional. De tal manera que se tiene: 
+        \begin{align}
+            \trel &\overset{\textrm{(S.I.)}}{=} \dfrac{3\pi m^3 c^3 \epsilon_0}{q^4 B^2}\label{eq: trel_SI}\\ 
+            T &\overset{\textrm{(S.I.)}}{=} \dfrac{2\pi m}{q B}\label{eq: T_SI}\\ 
+            \dfrac{T}{\trel} &\overset{\textrm{(S.I.)}}{=} \dfrac{2}{3} \dfrac{q^3 B c}{\epsilon_0 m^2 c^4 }\label{eq: T/trel_SI} 
+        \end{align}
+        Emplearemos los siguientes datos sobre el electrón, la permeabilidad dieléctrica del vacío y la relación que entre Teslas y electronvoltios: 
+        \begin{align*}
+            m &= 0.511 \textrm{MeV}/c^2\\ 
+            q &= 1e \\ 
+            \epsilon_0 &= 55.26\times10^6 \text{eV}^{-1}\text{e}^2\text{m}\\
+            \textrm{eV} &= \textrm{T}\times \text{e}\times \text{m}^2/\text{s} .\;\Rightarrow\; \text{T} = \dfrac{\text{eV}}{\text{e}\times\text{m}^2/\text{s}}
+        \end{align*} 
+        Entonces se llega a los siguientes resultados: 
+        \begin{align*}
+            \trel &= \dfrac{3\pi\times (0.511\times10^6)^2(55.26\times10^6)}{(1)^2(3\times10^8)^3} \textrm{ s} = 2.57\text{ s} \\ 
+            T &= \dfrac{2\pi (0.511\times10^6)}{(3\times10^8)^2(1)} \text{s} = 35.7\text{ ps}\\ 
+            \dfrac{T}{\trel} &= \dfrac{2}{3}\dfrac{(3\times10^8)(1)}{(55.26\times 10^6)(0.511\times10^{6})^2} = 1.386\times 10^{-11}\ll 1 \quad \qed   
+        \end{align*}
+    \item $B = 25\;\mu$T. Sustituyendo en las expresiones \eqref{eq: trel_SI} - \eqref{eq: T/trel_SI} se tiene: 
+    \begin{align*}
+        \trel &= \dfrac{3\pi(0.511\times10^6)^2(55.26\times10^6)}{(25\times 10^{-6})^2(3\times10^8)^3} \textrm{s} =4.12\times 10^9 \text{ s} \\ 
+        T &= \dfrac{2\pi (0.511\times10^6)}{(3\times10^8)^2(25\times10^{-6})} \text{s} = 1.43\;\mu\text{s}\\ 
+        \dfrac{T}{\trel} &= \dfrac{2}{3}\dfrac{(3\times10^8)(25\times10^{-6})}{(55.26\times 10^6)(0.511\times10^{6})^2} = 3.47\times 10^{-17}\ll 1 \quad \qed   
+    \end{align*}
+    \end{enumerate} 
+\end{enumerate}
+\section*{Ejercicio 7.}
+Para el año 2035 se proyecta en el CERN un acelerador de protones
+que sustituiría al LHC, el llamado FCC (Future Circular Collider), con
+una longitud de 100 km y una energia para los protones de 50 TeV.
+\begin{enumerate}[label=\roman*)]
+    \item Calcular la energía radiada por un protón en cada vuelta.
+    \item ¿Por qué se necesita que tenga una longitud tan enorme, en lugar de usar
+    el mismo tunel que para el LHC? 
+\end{enumerate}
+\Resolucion
+ \begin{enumerate}[label=\roman*)]
+    \item Lo primero que debemos observar es que estamos en el régimen ultrarrelativista pues la energía en reposo del protón es $\E_0 \appeq 1$ GeV y como: $\E = \gamma \E_0$ entonces se tiene. $\gamma \appeq 5\times 10^4$ que se cumple cuando $\beta \appeq 1$. Por tanto, la expresión que hemos de usar para la potencia radiada ha de ser la relativista de la forma: 
+    \begin{equation}
+        \Prad = \dfrac{q^2 a^2}{6\pi c^3}\gamma^4 = \dfrac{q^2 c\beta^4 }{6\pi R^2}\gamma^4 \;\because\; a = \dfrac{(\beta c)^2}{R}
+    \end{equation} 
+    Donde $R$ es el radio del acelerador, que se relaciona con el dato  de la longitud $L$ mediante: $L = 2\pi R$. La energía radiada en una vuelta (de periodo T) es entonces: 
+    \begin{equation}
+        \Erad(T) = \Prad \dfrac{2\pi R}{\beta c} = \dfrac{q^2 \beta^3}{3 R}\gamma^4 = \dfrac{2\pi}{3}\dfrac{q^2\beta^3}{L}\qty(\dfrac{\E}{\E_0})^4
+    \end{equation}
+    Haciendo el cambio correspondiente para trabajar en el S.I. y sustiyendo datos: 
+    \begin{equation}
+        \Erad(T) \overset{\text{(S.I)}}{=} \dfrac{2\pi}{3}\dfrac{q^2 \beta^3}{\epsilon_0}\qty(\dfrac{\E}{\E_0})^4 \appeq \dfrac{2\pi}{3}\dfrac{(1)^2 (1)^3 (5\times 10^4)^4}{55.26\times 10^6 \times 10^5}\text{ MeV} = 2.37\text{ MeV}
+    \end{equation}
+    \item Como $\Erad(T) \propto 1/L$ entonces se tiene: 
+    \begin{equation}
+        \dfrac{\tilde{\E}rad(T)}{\Erad(T)} = \dfrac{L_\text{FCC}}{L_\text{LHC}} = \dfrac{100}{27} \appeq 3.7
+    \end{equation}
+    Es decir, de usar el tunel del LHC, la energía radiada casi se cuadriplica, por lo que es conveniente contar con estas dimensiones de centenas de kilómetros. 
+ \end{enumerate}
